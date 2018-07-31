@@ -1,6 +1,8 @@
 package com.robinkanatzar.roomdbnotesapp;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Movie;
 import android.os.AsyncTask;
@@ -32,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.rv_main) RecyclerView recyclerView;
 
-    private NotesDatabase notesDatabase;
     private List<Note> notesList = new ArrayList<>();
     private NotesAdapter notesAdapter;
     private LinearLayoutManager linearLayoutManager;
+    private NotesViewModel notesViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +47,21 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         initRecyclerView();
-        initDatabase();
         initFAB();
+
+        initViewModel();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        loadExistingNotes();
+    private void initViewModel() {
+        notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
+        notesViewModel.getListOfNotes().observe(this, listOfNotes -> {
+            Toast.makeText(this, "Inside viewModel observer", Toast.LENGTH_SHORT).show();
+            notesList.clear();
+            for(int i = 0; i < listOfNotes.size(); i++) {
+                notesList.add(listOfNotes.get(i));
+            }
+            notesAdapter.notifyDataSetChanged();
+        });
     }
 
     private void initRecyclerView() {
@@ -76,16 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        deleteNote(notesList.get(position));
+                        //deleteNote(notesList.get(position));
                         Toast.makeText(MainActivity.this, getString(R.string.note_deleted), Toast.LENGTH_SHORT).show();
-                        loadExistingNotes();
+                        //loadExistingNotes();
                     }
                 })
         );
-    }
-
-    private void initDatabase() {
-        notesDatabase = NotesDatabase.getNotesDatabaseInstance(MainActivity.this);
     }
 
     private void initFAB() {
@@ -99,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /*
     @SuppressLint("StaticFieldLeak") // TODO static field leak
     private void loadExistingNotes() {
         new AsyncTask<Void, Void, List<Note>>() {
@@ -128,4 +133,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }.execute();
     }
+    */
 }

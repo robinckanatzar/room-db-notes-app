@@ -1,4 +1,4 @@
-package com.robinkanatzar.roomdbnotesapp;
+package com.robinkanatzar.roomdbnotesapp.readme;
 
 /* README
 

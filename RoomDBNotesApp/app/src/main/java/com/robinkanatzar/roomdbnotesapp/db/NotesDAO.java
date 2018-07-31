@@ -1,5 +1,7 @@
 package com.robinkanatzar.roomdbnotesapp.db;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -37,9 +39,11 @@ public interface NotesDAO {
     Example with query parameters:
         @Query("SELECT * FROM user WHERE age > :minAge")
         public User[] loadAllUsersOlderThan(int minAge);
+
+    Room generates all necessary code to update the LiveData when the database is updated.
      */
     @Query("SELECT * FROM "+ Constants.NOTES_TABLE_NAME)
-    List<Note> getAllNotes();
+    public LiveData<List<Note>> getAllNotes();
 
     /*
     When you create a DAO method and annotate it with @Insert, Room generates an implementation that
