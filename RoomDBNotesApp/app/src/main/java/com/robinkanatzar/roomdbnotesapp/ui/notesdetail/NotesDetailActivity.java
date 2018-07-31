@@ -1,6 +1,7 @@
 package com.robinkanatzar.roomdbnotesapp.ui.notesdetail;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import com.robinkanatzar.roomdbnotesapp.R;
 import com.robinkanatzar.roomdbnotesapp.db.entity.Note;
 import com.robinkanatzar.roomdbnotesapp.db.NotesDatabase;
 import com.robinkanatzar.roomdbnotesapp.utils.Constants;
+import com.robinkanatzar.roomdbnotesapp.viewmodel.NotesViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,9 +23,9 @@ public class NotesDetailActivity extends AppCompatActivity {
     @BindView(R.id.et_title) TextView title;
     @BindView(R.id.et_content) TextView content;
 
-    private NotesDatabase notesDatabase;
     private Note note;
     private Boolean isNewNote = false;
+    private NotesViewModel notesViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class NotesDetailActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        notesDatabase = NotesDatabase.getNotesDatabaseInstance(NotesDetailActivity.this);
+        notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
 
         if(this.getIntent().getExtras() != null) {
             if(this.getIntent().getExtras().getString(Constants.INTENT_EXTRA_NOTE_ID) != null) {
@@ -50,11 +52,13 @@ public class NotesDetailActivity extends AppCompatActivity {
         if(title.getText().length() > 0 && content.getText().length() > 0) {
             if(isNewNote) {
                 note = new Note(title.getText().toString(), content.getText().toString());
-                createNote(note);
+                notesViewModel.createNote(note);
+                finish();
             } else {
                 note.setTitle(title.getText().toString());
                 note.setContent(content.getText().toString());
-                updateNote(note);
+                notesViewModel.updateNote(note);
+                finish();
             }
         } else {
             Toast.makeText(this, getString(R.string.error_empty_field), Toast.LENGTH_SHORT).show();
@@ -64,37 +68,5 @@ public class NotesDetailActivity extends AppCompatActivity {
     @OnClick(R.id.btn_cancel)
     public void didTapCancel() {
         finish();
-    }
-
-    @SuppressLint("StaticFieldLeak") // TODO static field leak
-    private void updateNote(final Note noteToUpdate) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                notesDatabase.getNotesDAO().updateNote(noteToUpdate);
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                finish();
-            }
-        }.execute();
-    }
-
-    @SuppressLint("StaticFieldLeak") // TODO static field leak
-    private void createNote(final Note noteToCreate) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                notesDatabase.getNotesDAO().insertNote(noteToCreate);
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                finish();
-            }
-        }.execute();
     }
 }
