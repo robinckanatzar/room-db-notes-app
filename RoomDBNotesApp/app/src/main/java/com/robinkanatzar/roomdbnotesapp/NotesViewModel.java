@@ -32,4 +32,8 @@ public class NotesViewModel extends AndroidViewModel {
     private void getNotesFromDatabase() {
         notesList = notesDatabase.getNotesDAO().getAllNotes();
     }
+
+    public void deleteNote(Note note) {
+        notesDatabase.getNotesDAO().deleteNote(note);
+    }
 }

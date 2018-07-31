@@ -84,9 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        //deleteNote(notesList.get(position));
+                        notesViewModel.deleteNote(notesList.get(position));
                         Toast.makeText(MainActivity.this, getString(R.string.note_deleted), Toast.LENGTH_SHORT).show();
-                        //loadExistingNotes();
                     }
                 })
         );
@@ -102,36 +101,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    /*
-    @SuppressLint("StaticFieldLeak") // TODO static field leak
-    private void loadExistingNotes() {
-        new AsyncTask<Void, Void, List<Note>>() {
-            @Override
-            protected List doInBackground(Void... params) {
-                return notesDatabase.getNotesDAO().getAllNotes();
-            }
-
-            @Override
-            protected void onPostExecute(List items) {
-                notesList.clear();
-                for(int i = 0; i < items.size(); i++) {
-                    notesList.add((Note) items.get(i));
-                }
-                notesAdapter.notifyDataSetChanged();
-            }
-        }.execute();
-    }
-
-    @SuppressLint("StaticFieldLeak") // TODO static field leak
-    private void deleteNote(final Note noteToDelete) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                notesDatabase.getNotesDAO().deleteNote(noteToDelete);
-                return null;
-            }
-        }.execute();
-    }
-    */
 }
