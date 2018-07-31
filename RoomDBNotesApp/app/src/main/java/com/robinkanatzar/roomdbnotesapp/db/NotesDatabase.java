@@ -9,7 +9,7 @@ import android.content.Context;
 import com.robinkanatzar.roomdbnotesapp.db.dao.NotesDAO;
 import com.robinkanatzar.roomdbnotesapp.db.entity.Note;
 import com.robinkanatzar.roomdbnotesapp.utils.Constants;
-import com.robinkanatzar.roomdbnotesapp.utils.DateConverter;
+import com.robinkanatzar.roomdbnotesapp.db.converter.DateConverter;
 
 @Database(entities = {Note.class}, version = 1)
 @TypeConverters({DateConverter.class})

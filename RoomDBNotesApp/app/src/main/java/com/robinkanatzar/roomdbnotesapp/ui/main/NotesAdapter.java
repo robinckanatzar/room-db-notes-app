@@ -52,4 +52,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     public int getItemCount() {
         return notesList.size();
     }
+
+    void setWords(List<Note> notesList){
+        this.notesList = notesList;
+        notifyDataSetChanged();
+    }
 }

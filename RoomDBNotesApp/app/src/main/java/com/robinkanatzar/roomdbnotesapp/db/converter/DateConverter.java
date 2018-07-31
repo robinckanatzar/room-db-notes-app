@@ -1,4 +1,4 @@
-package com.robinkanatzar.roomdbnotesapp.utils;
+package com.robinkanatzar.roomdbnotesapp.db.converter;
 
 import android.arch.persistence.room.TypeConverter;
 
@@ -21,5 +21,4 @@ public class DateConverter {
             }
             return null;
         }
-
 }

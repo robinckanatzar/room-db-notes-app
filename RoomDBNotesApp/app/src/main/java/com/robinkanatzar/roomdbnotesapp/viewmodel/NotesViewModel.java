@@ -3,45 +3,36 @@ package com.robinkanatzar.roomdbnotesapp.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.robinkanatzar.roomdbnotesapp.repository.NotesRepository;
 import com.robinkanatzar.roomdbnotesapp.db.entity.Note;
-import com.robinkanatzar.roomdbnotesapp.db.NotesDatabase;
 
 import java.util.List;
 
 public class NotesViewModel extends AndroidViewModel {
+    private NotesRepository notesRepository;
     private LiveData<List<Note>> notesList;
-    private NotesDatabase notesDatabase;
 
     public NotesViewModel(@NonNull Application application) {
         super(application);
-        notesDatabase = NotesDatabase.getNotesDatabaseInstance(getApplication().getApplicationContext());
-        getNotesFromDatabase();
+        notesRepository = new NotesRepository(application);
+        notesList = notesRepository.getAllNotes();
     }
 
     public LiveData<List<Note>> getListOfNotes() {
-        if(notesList == null) {
-            notesList = new MutableLiveData<List<Note>>();
-            getNotesFromDatabase();
-        }
         return notesList;
     }
 
-    private void getNotesFromDatabase() {
-        notesList = notesDatabase.getNotesDAO().getAllNotes();
-    }
-
     public void deleteNote(Note note) {
-        notesDatabase.getNotesDAO().deleteNote(note);
+        notesRepository.delete(note);
     }
 
     public void createNote(Note note) {
-        notesDatabase.getNotesDAO().insertNote(note);
+        notesRepository.insert(note);
     }
 
     public void updateNote(Note note) {
-        notesDatabase.getNotesDAO().updateNote(note);
+        notesRepository.update(note);
     }
 }

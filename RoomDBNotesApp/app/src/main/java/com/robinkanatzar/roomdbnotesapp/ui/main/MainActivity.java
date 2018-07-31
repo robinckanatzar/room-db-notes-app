@@ -49,12 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private void initViewModel() {
         notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
         notesViewModel.getListOfNotes().observe(this, listOfNotes -> {
-            Toast.makeText(this, "Inside viewModel observer", Toast.LENGTH_SHORT).show();
-            notesList.clear();
-            for(int i = 0; i < listOfNotes.size(); i++) {
-                notesList.add(listOfNotes.get(i));
-            }
-            notesAdapter.notifyDataSetChanged();
+            notesAdapter.setWords(listOfNotes);
+            notesList = listOfNotes;
         });
     }
 
