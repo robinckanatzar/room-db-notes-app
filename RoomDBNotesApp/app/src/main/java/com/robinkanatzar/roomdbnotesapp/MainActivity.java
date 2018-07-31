@@ -28,14 +28,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-// Room Tutorial 17: Edit the MainActivity
-// Add @BindView for RV
-// Add Butterknife.bind(this)
-// Delete onCreate options menu
-// Delete onOptionsItemSelected
-
-// Room Tutorial 20: Incorporate Adapter
-
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.rv_main) RecyclerView recyclerView;

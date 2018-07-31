@@ -15,7 +15,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-// Room Tutorial 4: Add a new empty activity. Name it NotesDetailActivity.
 public class NotesDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.et_title) TextView title;

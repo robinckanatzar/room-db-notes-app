@@ -11,7 +11,6 @@ import com.robinkanatzar.roomdbnotesapp.db.Note;
 
 import java.util.List;
 
-// Room Tutorial 19: Create Notes Adapter
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
 
     private List<Note> notesList;
