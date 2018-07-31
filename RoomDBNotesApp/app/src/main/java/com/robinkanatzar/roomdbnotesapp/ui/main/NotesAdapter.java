@@ -1,4 +1,4 @@
-package com.robinkanatzar.roomdbnotesapp;
+package com.robinkanatzar.roomdbnotesapp.ui.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.robinkanatzar.roomdbnotesapp.db.Note;
+import com.robinkanatzar.roomdbnotesapp.R;
+import com.robinkanatzar.roomdbnotesapp.db.entity.Note;
 
 import java.util.List;
 

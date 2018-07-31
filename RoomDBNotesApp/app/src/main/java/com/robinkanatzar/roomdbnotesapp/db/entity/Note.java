@@ -1,4 +1,4 @@
-package com.robinkanatzar.roomdbnotesapp.db;
+package com.robinkanatzar.roomdbnotesapp.db.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

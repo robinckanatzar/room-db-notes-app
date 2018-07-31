@@ -1,4 +1,4 @@
-package com.robinkanatzar.roomdbnotesapp;
+package com.robinkanatzar.roomdbnotesapp.ui.notesdetail;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.robinkanatzar.roomdbnotesapp.db.Note;
+import com.robinkanatzar.roomdbnotesapp.R;
+import com.robinkanatzar.roomdbnotesapp.db.entity.Note;
 import com.robinkanatzar.roomdbnotesapp.db.NotesDatabase;
 import com.robinkanatzar.roomdbnotesapp.utils.Constants;
 

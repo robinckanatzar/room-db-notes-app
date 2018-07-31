@@ -1,4 +1,4 @@
-package com.robinkanatzar.roomdbnotesapp;
+package com.robinkanatzar.roomdbnotesapp.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -6,7 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
-import com.robinkanatzar.roomdbnotesapp.db.Note;
+import com.robinkanatzar.roomdbnotesapp.db.entity.Note;
 import com.robinkanatzar.roomdbnotesapp.db.NotesDatabase;
 
 import java.util.List;

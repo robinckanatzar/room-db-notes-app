@@ -6,6 +6,8 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
+import com.robinkanatzar.roomdbnotesapp.db.dao.NotesDAO;
+import com.robinkanatzar.roomdbnotesapp.db.entity.Note;
 import com.robinkanatzar.roomdbnotesapp.utils.Constants;
 import com.robinkanatzar.roomdbnotesapp.utils.DateConverter;
 
